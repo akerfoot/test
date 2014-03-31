@@ -1,4 +1,4 @@
-<!--
+/**
 Copyright 2010, Google Inc.
 All rights reserved.
 
@@ -27,7 +27,7 @@ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
+*/
 
 o3djs.require('o3djs.shader');
 
@@ -43,15 +43,6 @@ var source = 0;
 var jsProcessor = 0;
 var analyser;
 var analyserView1;
-
-var phaseL = 0.0;
-var phaseR = 0.0;
-var kBaseFrequency = 440.0;
-var phaseIncrL = 2.0 * Math.PI * 440.0 / 44100.0;
-var phaseIncrR = 2.0 * Math.PI * (kBaseFrequency * 1.1) / 44100.0; // modulate slightly different on right channel
-var kTwoPi = 2.0 * Math.PI;
-var pitchRate = 1.0;
-
 
 function loadSample(url) {
     // Load asynchronously
@@ -75,7 +66,7 @@ function loadSample(url) {
                 console.log("Error decoding source!");
             }
         );
-    }
+    };
 
     request.send();
 }

@@ -1,5 +1,4 @@
-
-<!--
+/**
 Copyright 2010, Google Inc.
 All rights reserved.
 
@@ -28,12 +27,22 @@ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
+*/
 
 test = test || {};
 test.audio = test.audio || {};
 
 (function() {
+    'use strict';
+
+    var phaseL = 0.0;
+    var phaseR = 0.0;
+    var kBaseFrequency = 440.0;
+    var phaseIncrL = 2.0 * Math.PI * 440.0 / 44100.0;
+    var phaseIncrR = 2.0 * Math.PI * (kBaseFrequency * 1.1) / 44100.0; // modulate slightly different on right channel
+    var kTwoPi = 2.0 * Math.PI;
+    var pitchRate = 1.0;
+
     function process(event) {
         // Get left/right input and output arrays
         var inputArrayL = event.inputBuffer.getChannelData(0);
@@ -59,7 +68,7 @@ test.audio = test.audio || {};
     }
 
     function pitchHandler(event, ui) {
-        pitchCents = ui.value;
+        var pitchCents = ui.value;
         pitchRate = Math.pow(2.0, pitchCents / 1200.0); // convert from cents to rate
         var pitch = kBaseFrequency * pitchRate;
 
